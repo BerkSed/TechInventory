@@ -1,0 +1,209 @@
+﻿@page "/labs"
+
+<PageTitle>Laboratorios</PageTitle>
+
+<div class="container my-3">
+    <!-- Encabezado -->
+    <div class="text-center mb-3">
+        <h1 class="display-5 fw-bold">Lista de Laboratorios</h1>
+        <p class="text-muted">Consulta y administra todos los laboratorios registrados en el sistema.</p>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Registrar Nuevo Laboratorio</h2>
+        <form onsubmit="registerLaboratorio(event)">
+            <!-- Nombre del Laboratorio -->
+            <div class="mb-3">
+                <label for="nombreLaboratorio" class="form-label">Nombre del Laboratorio</label>
+                <input type="text" class="form-control" id="nombreLaboratorio" placeholder="Ingrese el nombre del laboratorio" required>
+            </div>
+
+            <!-- Ubicación del Laboratorio -->
+            <div class="mb-3">
+                <label for="ubicacionLaboratorio" class="form-label">Ubicación</label>
+                <input type="text" class="form-control" id="ubicacionLaboratorio" placeholder="Ejemplo: Edificio A, Piso 3" required>
+            </div>
+
+            <!-- Responsable del Laboratorio -->
+            <div class="mb-3">
+                <label for="responsableLaboratorio" class="form-label">Responsable</label>
+                <input type="text" class="form-control" id="responsableLaboratorio" placeholder="Ingrese el nombre del responsable" required>
+            </div>
+
+            <!-- Capacidad del Laboratorio -->
+            <div class="mb-3">
+                <label for="capacidadLaboratorio" class="form-label">Capacidad</label>
+                <input type="number" class="form-control" id="capacidadLaboratorio" placeholder="Ingrese la capacidad máxima (número de equipos)" required>
+            </div>
+
+            <!-- Tipo de Laboratorio -->
+            <div class="mb-3">
+                <label for="tipoLaboratorio" class="form-label">Tipo de Laboratorio</label>
+                <select class="form-select" id="tipoLaboratorio" required>
+                    <option selected disabled>Seleccione un tipo</option>
+                    <option value="1">Laboratorio de Computación</option>
+                    <option value="2">Laboratorio de Redes</option>
+                    <option value="3">Laboratorio de Electrónica</option>
+                    <option value="4">Otro</option>
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-end">
+                <button type="reset" class="btn btn-secondary me-2">Limpiar</button>
+                <button type="submit" class="btn btn-primary">Registrar Laboratorio</button>
+            </div>
+        </form>
+    </div>
+
+    <br />
+
+    <!-- Tabla de Laboratorios -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="d-flex justify-content-between mb-3">
+                    <h2>Lista de Laboratorios</h2>
+                    <button class="btn btn-primary" onclick="loadLaboratorios()">Cargar Laboratorios</button>
+                </div>
+                <table class="table table-striped align-middle">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Número de Equipos</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="laboratoriosTableBody">
+                        <!-- Filas generadas dinámicamente -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function registerLaboratorio(event) {
+        event.preventDefault();
+
+        const laboratorio = {
+            nombre: document.getElementById("nombreLaboratorio").value,
+            ubicacion: document.getElementById("ubicacionLaboratorio").value,
+            responsable: document.getElementById("responsableLaboratorio").value,
+            capacidad: parseInt(document.getElementById("capacidadLaboratorio").value, 10),
+            tipo: document.getElementById("tipoLaboratorio").value
+        };
+
+        try {
+            await window.LaboratorioDB.addLaboratorio(laboratorio);
+            alert("Laboratorio registrado con éxito.");
+            location.reload(); // Refrescar para ver los cambios
+        } catch (error) {
+            console.error("Error al registrar el laboratorio:", error);
+        }
+    }
+</script>
+
+<script>
+  
+    // Nombre y versión de la base de datos
+    const DB_NAME = "LaboratoriosDB";
+    const DB_VERSION = 1;
+
+    // Inicializar la base de datos
+    function initDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains("laboratorios")) {
+                    const store = db.createObjectStore("laboratorios", { keyPath: "id", autoIncrement: true });
+                    store.createIndex("nombre", "nombre", { unique: false });
+                }
+            };
+
+            request.onsuccess = (event) => resolve(event.target.result);
+            request.onerror = (event) => reject(event.target.error);
+        });
+    }
+
+    // Agregar un laboratorio
+    async function addLaboratorio(laboratorio) {
+        const db = await initDB();
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction("laboratorios", "readwrite");
+            const store = transaction.objectStore("laboratorios");
+            const request = store.add(laboratorio);
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = (event) => reject(event.target.error);
+        });
+    }
+
+    // Obtener todos los laboratorios
+    async function getLaboratorios() {
+        const db = await initDB();
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction("laboratorios", "readonly");
+            const store = transaction.objectStore("laboratorios");
+            const request = store.getAll();
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = (event) => reject(event.target.error);
+        });
+    }
+
+    // Asegurar que las funciones de IndexedDB estén disponibles globalmente
+    window.LaboratorioDB = {
+        addLaboratorio: (laboratorio) => addLaboratorio(laboratorio),
+        getLaboratorios: () => getLaboratorios()
+    };
+
+    async function loadLaboratorios() {
+        try {
+            const laboratorios = await window.LaboratorioDB.getLaboratorios(); // Recuperar los datos
+            const tbody = document.getElementById("laboratoriosTableBody");
+            tbody.innerHTML = ""; // Limpiar el cuerpo de la tabla
+
+            if (laboratorios.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center">No hay laboratorios registrados.</td></tr>`;
+                return;
+            }
+
+            laboratorios.forEach((lab, index) => {
+                const row = `
+                            <tr>
+                                <th scope="row">${index + 1}</th>
+                                <td>${lab.nombre}</td>
+                                <td>${lab.ubicacion}</td>
+                                <td>${lab.capacidad}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewLaboratorio(${lab.id})">
+                                        <i class="bi bi-eye"></i> Ver Detalles
+                                    </button>
+                                </td>
+                            </tr>`;
+                tbody.innerHTML += row;
+            });
+        } catch (error) {
+            console.error("Error al cargar los laboratorios:", error);
+            alert("Ocurrió un error al cargar los datos. Revisa la consola para más detalles.");
+        }
+    }
+
+    function viewLaboratorio(id) {
+        alert(`Ver detalles del laboratorio con ID: ${id}`);
+    }
+</script>
+
+
+
+
+
+
+

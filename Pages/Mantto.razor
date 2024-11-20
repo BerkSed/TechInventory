@@ -1,0 +1,125 @@
+﻿@page "/mantto"
+
+<PageTitle>Mantenimiento</PageTitle>
+
+<div class="container mt-3">
+    <!-- Título -->
+    <h2 class="text-center mb-4 display-5 fw-bold">Gestión de Mantenimiento</h2>
+
+    <!-- Consejos -->
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-lightbulb"></i> Consejos para el mantenimiento de equipos:</h5>
+        <ul>
+            <li>Programe los mantenimientos con anticipación para evitar fallas inesperadas.</li>
+            <li>Documente claramente cada tarea de mantenimiento realizada.</li>
+            <li>Priorice los equipos críticos para el funcionamiento del sistema.</li>
+            <li>Revise las garantías antes de realizar reparaciones significativas.</li>
+        </ul>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="alert alert-secondary" role="alert">
+        <i class="bi bi-gear"></i> <strong>Nota:</strong> Un buen mantenimiento puede prolongar la vida útil del equipo y reducir costos operativos.
+    </div>
+
+    <!-- Formulario de Registro de Mantenimiento -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5><i class="bi bi-tools"></i> Nuevo Registro de Mantenimiento</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <!-- Selección de Equipo -->
+                <div class="mb-3">
+                    <label for="equipoMantenimiento" class="form-label">Equipo</label>
+                    <select class="form-select" id="equipoMantenimiento" required>
+                        <option selected disabled>Seleccione un equipo</option>
+                        <option value="1">Laptop - Dell XPS 13</option>
+                        <option value="2">Servidor - HP ProLiant</option>
+                        <option value="3">Monitor - LG UltraWide</option>
+                    </select>
+                </div>
+
+                <!-- Tipo de Mantenimiento -->
+                <div class="mb-3">
+                    <label for="tipoMantenimiento" class="form-label">Tipo de Mantenimiento</label>
+                    <select class="form-select" id="tipoMantenimiento" required>
+                        <option selected disabled>Seleccione el tipo</option>
+                        <option value="Preventivo">Preventivo</option>
+                        <option value="Correctivo">Correctivo</option>
+                        <option value="Emergente">Emergente</option>
+                    </select>
+                </div>
+
+                <!-- Fecha de Mantenimiento -->
+                <div class="mb-3">
+                    <label for="fechaMantenimiento" class="form-label">Fecha de Mantenimiento</label>
+                    <input type="date" class="form-control" id="fechaMantenimiento" required>
+                </div>
+
+                <!-- Técnico Responsable -->
+                <div class="mb-3">
+                    <label for="tecnicoMantenimiento" class="form-label">Técnico Responsable</label>
+                    <input type="text" class="form-control" id="tecnicoMantenimiento" placeholder="Nombre del técnico encargado" required>
+                </div>
+
+                <!-- Detalles -->
+                <div class="mb-3">
+                    <label for="detallesMantenimiento" class="form-label">Detalles del Mantenimiento</label>
+                    <textarea class="form-control" id="detallesMantenimiento" rows="3" placeholder="Describa las acciones realizadas"></textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-end">
+                    <button type="reset" class="btn btn-secondary me-2">Limpiar</button>
+                    <button type="submit" class="btn btn-success">Guardar Mantenimiento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de Mantenimientos Realizados -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h5><i class="bi bi-list-check"></i> Historial de Mantenimiento</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Técnico</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Laptop - Dell XPS 13</td>
+                        <td>Preventivo</td>
+                        <td>2024-11-05</td>
+                        <td>Juan Pérez</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Servidor - HP ProLiant</td>
+                        <td>Correctivo</td>
+                        <td>2024-11-10</td>
+                        <td>Ana Martínez</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

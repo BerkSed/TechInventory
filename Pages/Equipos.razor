@@ -1,0 +1,129 @@
+﻿@page "/equipos"
+
+<PageTitle>Equipos</PageTitle>
+
+<div class="container my-3">
+    <!-- Encabezado -->
+    <div class="text-center mb-4">
+        <h1 class="display-5 fw-bold">Lista de Equipos</h1>
+        <p class="text-muted">Consulta y administra todos los equipos de TI y sus asignaciones.</p>
+    </div>
+
+    <!-- Tabla de Equipos -->
+    <div class="card shadow border-0">
+        <div class="card-body">
+
+            <!-- Formulario de Registro  -->
+            <div class="container mt-3">
+                <h2 class="text-center mb-4">Registrar Nuevo Equipo</h2>
+                <form>
+                    <!-- Nombre del Equipo -->
+                    <div class="mb-3">
+                        <label for="nombreEquipo" class="form-label">Nombre del Equipo</label>
+                        <input type="text" class="form-control" id="nombreEquipo" placeholder="Ingrese el nombre del equipo" required>
+                    </div>
+
+                    <!-- Tipo de Equipo -->
+                    <div class="mb-3">
+                        <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
+                        <select class="form-select" id="tipoEquipo" required>
+                            <option selected disabled>Seleccione un tipo</option>
+                            <option value="1">Laptop</option>
+                            <option value="2">Desktop</option>
+                            <option value="3">Servidor</option>
+                            <option value="4">Otro</option>
+                        </select>
+                    </div>
+
+                    <!-- Número de Serie -->
+                    <div class="mb-3">
+                        <label for="numeroSerie" class="form-label">Número de Serie</label>
+                        <input type="text" class="form-control" id="numeroSerie" placeholder="Ingrese el número de serie" required>
+                    </div>
+
+                    <!-- Laboratorio Asignado -->
+                    <div class="mb-3">
+                        <label for="laboratorioAsignado" class="form-label">Laboratorio</label>
+                        <select class="form-select" id="laboratorioAsignado" required>
+                            <option selected disabled>Seleccione un laboratorio</option>
+                            <option value="1">Laboratorio 1</option>
+                            <option value="2">Laboratorio 2</option>
+                            <option value="3">Laboratorio 3</option>
+                        </select>
+                    </div>
+
+                    <!-- Fecha de Compra -->
+                    <div class="mb-3">
+                        <label for="fechaCompra" class="form-label">Fecha de Compra</label>
+                        <input type="date" class="form-control" id="fechaCompra" required>
+                    </div>
+
+                    <!-- Estado del Equipo -->
+                    <div class="mb-3">
+                        <label for="estadoEquipo" class="form-label">Estado</label>
+                        <select class="form-select" id="estadoEquipo" required>
+                            <option selected disabled>Seleccione el estado</option>
+                            <option value="1">En Uso</option>
+                            <option value="2">En Mantenimiento</option>
+                            <option value="3">Disponible</option>
+                            <option value="4">Dado de Baja</option>
+                        </select>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-end">
+                        <button type="reset" class="btn btn-secondary me-2">Limpiar</button>
+                        <button type="submit" class="btn btn-primary">Registrar Equipo</button>
+                    </div>
+                </form>
+            </div>
+
+            <br />
+
+
+            <!-- Barra de búsqueda -->
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Buscar equipo por nombre o serie...">
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead class="table-success">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Número de Serie</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Laboratorio</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Ejemplo de fila -->
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Computadora Dell Optiplex</td>
+                            <td>D123456789</td>
+                            <td><span class="badge bg-success">Operativo</span></td>
+                            <td>Laboratorio de Redes</td>
+                            <td>
+                                <a href="/equipos/1" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Ver Detalles</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Router Cisco</td>
+                            <td>C987654321</td>
+                            <td><span class="badge bg-warning text-dark">Mantenimiento</span></td>
+                            <td>Laboratorio de Electrónica</td>
+                            <td>
+                                <a href="/equipos/2" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Ver Detalles</a>
+                            </td>
+                        </tr>
+                        <!-- Agregar más filas aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

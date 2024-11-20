@@ -1,0 +1,104 @@
+﻿@page "/notifn"
+
+<PageTitle>Notificaciones</PageTitle>
+
+<div class="container mt-3">
+    <!-- Título -->
+    <h2 class="text-center mb-4 display-5 fw-bold">Gestión de Notificaciones</h2>
+
+    <!-- Consejos -->
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-lightbulb"></i> Consejos para notificar eficazmente:</h5>
+        <ul>
+            <li>Sea claro y conciso en el mensaje para evitar confusiones.</li>
+            <li>Use notificaciones solo para eventos importantes o urgentes.</li>
+            <li>Revise la información antes de enviar para garantizar la precisión.</li>
+        </ul>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="alert alert-secondary" role="alert">
+        <i class="bi bi-info-circle"></i> <strong>Nota:</strong> Las notificaciones enviadas a través de este sistema serán visibles en tiempo real para los usuarios registrados.
+    </div>
+
+    <!-- Historial de Notificaciones -->
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h5><i class="bi bi-bell"></i> Historial de Notificaciones</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Mensaje</th>
+                        <th>Fecha y Hora</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>Mantenimiento pendiente para el equipo Dell XPS 13</td>
+                        <td>2024-11-18 10:30 AM</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ana Martínez</td>
+                        <td>Asignación de equipo completada: Monitor LG UltraWide</td>
+                        <td>2024-11-18 9:15 AM</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ejemplo de Notificación -->
+    <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+        <i class="bi bi-bell-fill me-2"></i>
+        <div>
+            <strong>Notificación:</strong> "Mantenimiento programado para el equipo HP ProLiant el 20 de noviembre."
+        </div>
+    </div>
+
+    <!-- Formulario para Crear Nueva Notificación -->
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5><i class="bi bi-plus-circle"></i> Nueva Notificación</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <!-- Selección de Usuario -->
+                <div class="mb-3">
+                    <label for="usuarioNotificacion" class="form-label">Usuario</label>
+                    <select class="form-select" id="usuarioNotificacion" required>
+                        <option selected disabled>Seleccione un usuario</option>
+                        <option value="1">Juan Pérez</option>
+                        <option value="2">Ana Martínez</option>
+                        <option value="3">Carlos Gómez</option>
+                    </select>
+                </div>
+
+                <!-- Mensaje de Notificación -->
+                <div class="mb-3">
+                    <label for="mensajeNotificacion" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensajeNotificacion" rows="3" placeholder="Escriba el mensaje de la notificación" required></textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-end">
+                    <button type="reset" class="btn btn-secondary me-2">Limpiar</button>
+                    <button type="submit" class="btn btn-success">Enviar Notificación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,119 @@
+﻿@page "/asing"
+
+<PageTitle>Asignaciones</PageTitle>
+
+<div class="container mt-3 mb-5">
+    <!-- Título -->
+    <h2 class="text-center mb-4 display-5 fw-bold">Gestión de Asignaciones</h2>
+
+    <!-- Consejos -->
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle"></i> Consejos para gestionar asignaciones:</h5>
+        <ul>
+            <li>Verifique que el equipo esté disponible antes de asignarlo.</li>
+            <li>Evite asignar múltiples equipos a un solo usuario sin justificación.</li>
+            <li>Actualice regularmente las asignaciones para mantener el inventario actualizado.</li>
+        </ul>
+    </div>
+
+    <!-- Formulario de Asignación -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5><i class="bi bi-plus-circle"></i> Nueva Asignación</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <!-- Selección de Equipo -->
+                <div class="mb-3">
+                    <label for="equipoAsignacion" class="form-label">Equipo</label>
+                    <select class="form-select" id="equipoAsignacion" required>
+                        <option selected disabled>Seleccione un equipo</option>
+                        <option value="1">Laptop - Dell XPS 13</option>
+                        <option value="2">Servidor - HP ProLiant</option>
+                        <option value="3">Monitor - LG UltraWide</option>
+                    </select>
+                </div>
+
+                <!-- Selección de Usuario -->
+                <div class="mb-3">
+                    <label for="usuarioAsignacion" class="form-label">Usuario</label>
+                    <select class="form-select" id="usuarioAsignacion" required>
+                        <option selected disabled>Seleccione un usuario</option>
+                        <option value="1">Juan Pérez</option>
+                        <option value="2">Ana Martínez</option>
+                        <option value="3">Carlos Gómez</option>
+                    </select>
+                </div>
+
+                <!-- Fecha de Asignación -->
+                <div class="mb-3">
+                    <label for="fechaAsignacion" class="form-label">Fecha de Asignación</label>
+                    <input type="date" class="form-control" id="fechaAsignacion" required>
+                </div>
+
+                <!-- Ubicación -->
+                <div class="mb-3">
+                    <label for="ubicacionAsignacion" class="form-label">Ubicación</label>
+                    <input type="text" class="form-control" id="ubicacionAsignacion" placeholder="Ejemplo: Oficina 102" required>
+                </div>
+
+                <!-- Comentarios -->
+                <div class="mb-3">
+                    <label for="comentariosAsignacion" class="form-label">Comentarios</label>
+                    <textarea class="form-control" id="comentariosAsignacion" rows="3" placeholder="Detalles adicionales sobre la asignación"></textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-end">
+                    <button type="reset" class="btn btn-secondary me-2">Limpiar</button>
+                    <button type="submit" class="btn btn-success">Guardar Asignación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de Asignaciones Actuales -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h5><i class="bi bi-list-task"></i> Asignaciones Actuales</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Usuario</th>
+                        <th>Fecha de Asignación</th>
+                        <th>Ubicación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Laptop - Dell XPS 13</td>
+                        <td>Juan Pérez</td>
+                        <td>2024-11-01</td>
+                        <td>Oficina 102</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Monitor - LG UltraWide</td>
+                        <td>Ana Martínez</td>
+                        <td>2024-11-02</td>
+                        <td>Sala de Conferencias</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
